@@ -1,0 +1,228 @@
+/* ==========================================================================
+   Profile / Settings Page — Liquid Glass Theme
+   ========================================================================== */
+
+:host {
+  display: block; height: 100%;
+}
+
+/* ── Background glow blobs ─────────────────────────────── */
+.bg-glow {
+  position: fixed; border-radius: 50%;
+  filter: blur(90px); pointer-events: none; z-index: 0;
+}
+.glow-1 {
+  width: 360px; height: 360px;
+  background: rgba(124, 61, 255, 0.22);
+  top: -80px; left: -70px;
+}
+.glow-2 {
+  width: 280px; height: 280px;
+  background: rgba(33, 212, 253, 0.24);
+  top: 40%; right: -70px;
+  animation: glowDrift 11s ease-in-out infinite;
+}
+.glow-3 {
+  width: 220px; height: 220px;
+  background: rgba(124, 61, 255, 0.18);
+  bottom: 0; left: 30%;
+  animation: glowDrift 14s ease-in-out infinite reverse;
+}
+@keyframes glowDrift {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-26px); }
+}
+
+/* ── Page container ────────────────────────────────────── */
+.profile-container {
+  position: relative; z-index: 1;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 40px 20px 140px;
+  animation: pageIn 0.4s ease both;
+  display: flex; flex-direction: column; gap: 16px;
+}
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Shared section card headers ───────────────────────── */
+.section-card {
+  border-radius: 24px; padding: 22px 20px; cursor: default;
+}
+.card-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+  h3 { font-size: 17px; font-weight: 700; color: var(--vibe-text-main); margin: 0; }
+}
+.card-icon-wrap {
+  width: 34px; height: 34px; border-radius: 10px;
+  background: rgba(124, 61, 255, 0.15); border: 1px solid rgba(33, 212, 253, 0.2);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  svg { stroke: var(--vibe-accent); }
+}
+
+/* ── Hero card ─────────────────────────────────────────── */
+.hero-card {
+  border-radius: 28px; padding: 36px 24px 28px;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+.avatar-ring {
+  padding: 3px; border-radius: 50%; margin-bottom: 16px;
+}
+.avatar-lg {
+  width: 88px; height: 88px; border-radius: 50%;
+  background: var(--vibe-surface); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  color: var(--vibe-text-main); font-size: 36px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  border: 3px solid transparent;
+}
+.hero-name {
+  font-size: 22px; font-weight: 800; color: var(--vibe-text-main);
+  margin: 0 0 4px; letter-spacing: -0.3px;
+}
+.hero-username {
+  font-size: 14px; color: var(--vibe-text-muted); margin: 0 0 14px;
+}
+.hero-badge {
+  padding: 5px 16px; background: rgba(124, 61, 255, 0.15);
+  border: 1px solid rgba(33, 212, 253, 0.25); border-radius: 999px;
+  font-size: 12px; font-weight: 600; color: var(--vibe-accent);
+}
+
+/* ── Input shells ──────────────────────────────────────── */
+.vibe-input {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%; height: 52px; padding: 0 18px; border-radius: 999px;
+  margin-bottom: 12px; transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  box-sizing: border-box;
+  &.focused {
+    border-color: var(--vibe-accent);
+    box-shadow: 0 0 0 3px rgba(124, 61, 255, 0.18);
+  }
+  &.is-error {
+    border-color: #d9231e;
+    box-shadow: 0 0 0 3px rgba(217,35,30,0.15);
+  }
+}
+.input-icon { width: 18px; height: 18px; flex-shrink: 0; stroke: var(--vibe-accent); }
+.field-input {
+  flex: 1; height: 100%; color: var(--vibe-text-main) !important;
+  font-size: 16px; font-weight: 500; font-family: inherit;
+  &::placeholder { color: var(--vibe-text-muted) !important; }
+}
+.error-msg {
+  color: #d9231e; font-size: 12px; font-weight: 500;
+  margin-top: -8px; margin-bottom: 10px; padding-left: 18px;
+}
+
+/* ── Action buttons ────────────────────────────────────── */
+.action-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 52px; margin-top: 4px;
+  color: #fff; font-size: 16px; font-weight: 700;
+  border-radius: 999px; cursor: pointer; font-family: inherit;
+  &[disabled] { opacity: 0.5; cursor: not-allowed; }
+}
+.btn-spinner {
+  width: 20px; height: 20px; border: 2.5px solid rgba(255,255,255,0.35);
+  border-top-color: #fff; border-radius: 50%; animation: spin 0.75s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Appearance / dark mode toggle ────────────────────── */
+.toggle-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.toggle-info {
+  display: flex; align-items: center; gap: 12px; flex: 1;
+  svg { stroke: var(--vibe-accent); flex-shrink: 0; }
+}
+.toggle-label { display: block; font-size: 15px; font-weight: 700; color: var(--vibe-text-main); }
+.toggle-sub { display: block; font-size: 12px; color: var(--vibe-text-muted); margin-top: 2px; }
+
+/* iOS-style custom toggle */
+.ios-toggle {
+  width: 52px; height: 30px; border-radius: 999px;
+  padding: 0; cursor: pointer; display: flex; align-items: center;
+  transition: background 0.3s ease, border-color 0.3s ease;
+  flex-shrink: 0; position: relative;
+  &.toggle-on {
+    background: linear-gradient(135deg, var(--vibe-iris), var(--vibe-cyan));
+    border-color: rgba(33, 212, 253, 0.35);
+  }
+}
+.toggle-thumb {
+  width: 24px; height: 24px; border-radius: 50%; background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2); position: absolute; left: 2px;
+  transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1);
+  .toggle-on & { transform: translateX(22px); }
+}
+
+/* ── Logout card ───────────────────────────────────────── */
+.logout-card {
+  display: flex; align-items: center; gap: 14px;
+  width: 100%; padding: 18px 20px; border-radius: 22px; cursor: pointer; text-align: left;
+  border: 1px solid rgba(217,35,30,0.3);
+  font-family: inherit;
+  &:hover { background: rgba(217,35,30,0.1); border-color: rgba(217,35,30,0.4); }
+}
+.logout-icon-wrap {
+  width: 36px; height: 36px; border-radius: 10px; background: rgba(217,35,30,0.14);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  svg { stroke: #d9231e; }
+}
+.logout-label { flex: 1; font-size: 16px; font-weight: 700; color: #d9231e; }
+.logout-arrow { stroke: rgba(217,35,30,0.5); flex-shrink: 0; }
+.bottom-spacer { height: 20px; }
+
+/* ══════════════════════════════════════════════════════════════
+   LIGHT / DARK THEME CONTRAST
+══════════════════════════════════════════════════════════════ */
+
+/* Profile card text adapts to theme */
+.hero-name,
+.toggle-label,
+.card-header h3 {
+  color: var(--app-text, #ffffff);
+}
+
+.hero-username,
+.toggle-sub {
+  color: var(--app-muted, rgba(255,255,255,0.64));
+}
+
+/* Input text uses theme token */
+.field-input {
+  color: var(--app-text, #ffffff) !important;
+  &::placeholder { color: var(--app-muted, rgba(255,255,255,0.5)) !important; }
+}
+
+/* Input icon stroke */
+.input-icon {
+  stroke: var(--vibe-accent, #21D4FD);
+}
+
+/* ─── Light mode specific ──────────────────────────────────── */
+.theme-light {
+  .vibe-input {
+    background: rgba(255, 255, 255, 0.78);
+    border-color: rgba(7, 17, 31, 0.14) !important;
+  }
+
+  .hero-card,
+  .section-card {
+    color: #07111f;
+  }
+
+  .card-icon-wrap svg { stroke: var(--vibe-accent, #7C3DFF); }
+  .input-icon { stroke: var(--vibe-accent, #7C3DFF); }
+  .toggle-row { color: #07111f; }
+}
+
+/* ─── Dark mode specific ───────────────────────────────────── */
+.theme-dark {
+  .vibe-input {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+}
+

@@ -1,0 +1,482 @@
+/* ==========================================================================
+   VibeChat Settings Page — Liquid Glass Design
+   ========================================================================== */
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+/* ─── Page background ────────────────────────────────────────────── */
+ion-content.settings-page {
+  --background: var(--app-bg, #000000);
+  color: var(--app-text, #ffffff);
+}
+
+/* ─── Ambient glow blobs ─────────────────────────────────────────── */
+.sg-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+.sg-glow-1 {
+  width: 400px; height: 400px;
+  background: rgba(124, 61, 255, 0.20);
+  top: -100px; left: -80px;
+}
+.sg-glow-2 {
+  width: 320px; height: 320px;
+  background: rgba(33, 212, 253, 0.18);
+  bottom: 80px; right: -80px;
+  animation: sgGlowDrift 12s ease-in-out infinite;
+}
+@keyframes sgGlowDrift {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-30px); }
+}
+
+/* ─── Sticky header ──────────────────────────────────────────────── */
+.sg-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 52px 1fr 52px;
+  align-items: center;
+  padding: 14px 18px;
+  border-radius: 0 0 24px 24px;
+  margin: 0 8px;
+}
+
+.sg-back {
+  width: 42px; height: 42px;
+  border: none; border-radius: 14px;
+  background: transparent;
+  color: var(--app-icon, rgba(255,255,255,0.88));
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: transform 200ms ease, background 200ms ease;
+  &:hover { background: rgba(124, 61, 255, 0.12); transform: translateX(-2px); }
+}
+
+.sg-header-center {
+  text-align: center;
+  h1 {
+    font-size: 18px; font-weight: 800; margin: 0 0 2px;
+    color: var(--app-text, #ffffff);
+    letter-spacing: -0.3px;
+  }
+  p {
+    font-size: 12px; margin: 0;
+    color: var(--app-muted, rgba(255,255,255,0.6));
+  }
+}
+
+.sg-header-spacer { width: 42px; }
+
+/* ─── Page container ─────────────────────────────────────────────── */
+.sg-container {
+  position: relative;
+  z-index: 1;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 20px 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: sgPageIn 0.4s ease both;
+}
+@keyframes sgPageIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   GLASS CARD TOKENS — light/dark tint WITHOUT changing .liquid-glass
+═══════════════════════════════════════════════════════════════════ */
+.settings-glass-card {
+  border-radius: 28px;
+}
+
+.theme-dark .settings-glass-card {
+  background-color: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+.theme-light .settings-glass-card {
+  background-color: rgba(0, 0, 0, 0.045);
+  border: 1px solid rgba(7, 17, 31, 0.12);
+  color: #07111f;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   WAVY GLASS EFFECT — additive layer only, does not touch .liquid-glass
+═══════════════════════════════════════════════════════════════════ */
+.wavy-glass {
+  position: relative;
+  overflow: hidden;
+}
+
+.wavy-glass::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(33, 212, 253, 0.12), transparent 28%),
+    radial-gradient(circle at 80% 70%, rgba(124, 61, 255, 0.12), transparent 30%),
+    linear-gradient(
+      115deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.10) 42%,
+      rgba(255, 255, 255, 0.18) 50%,
+      rgba(255, 255, 255, 0.08) 58%,
+      transparent 100%
+    );
+  opacity: 0.55;
+  transform: translateX(-20%) rotate(8deg);
+  animation: glassWave 9s ease-in-out infinite alternate;
+  mix-blend-mode: screen;
+}
+
+.theme-light .wavy-glass::after {
+  opacity: 0.38;
+  mix-blend-mode: multiply;
+}
+
+@keyframes glassWave {
+  0%   { transform: translateX(-22%) translateY(-4%) rotate(8deg); }
+  50%  { transform: translateX(6%)  translateY(3%)  rotate(10deg); }
+  100% { transform: translateX(22%) translateY(-2%) rotate(8deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wavy-glass::after { animation: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   PROFILE CARD
+═══════════════════════════════════════════════════════════════════ */
+.sg-profile-card {
+  padding: 28px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+}
+
+.sg-avatar-ring {
+  padding: 3px;
+  border-radius: 50%;
+  margin-bottom: 14px;
+  box-shadow: 0 0 28px rgba(124, 61, 255, 0.36), 0 0 16px rgba(33, 212, 253, 0.24);
+}
+
+.sg-avatar {
+  width: 82px; height: 82px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  font-size: 32px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  border: 2.5px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+}
+
+.sg-profile-info {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+}
+
+.sg-name {
+  font-size: 22px; font-weight: 800; margin: 0;
+  color: var(--app-text);
+  letter-spacing: -0.3px;
+}
+
+.sg-username {
+  font-size: 14px; margin: 0;
+  color: var(--app-muted);
+}
+
+.sg-phone-row {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 6px;
+  font-size: 13px; font-weight: 600;
+  color: var(--app-text);
+}
+
+.sg-phone-icon {
+  stroke: #21D4FD;
+  flex-shrink: 0;
+}
+
+.sg-badge {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 5px 16px;
+  border-radius: 999px;
+  font-size: 11px; font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SECTION CARD
+═══════════════════════════════════════════════════════════════════ */
+.sg-card {
+  padding: 18px 18px 10px;
+}
+
+.sg-card-header {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px;
+
+  h3 {
+    font-size: 14px; font-weight: 800; letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--app-text);
+    margin: 0;
+  }
+}
+
+.sg-card-icon-wrap {
+  width: 32px; height: 32px; border-radius: 10px;
+  background: rgba(124, 61, 255, 0.14);
+  border: 1px solid rgba(33, 212, 253, 0.22);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  svg { stroke: #21D4FD; }
+}
+
+/* ─── Rows ────────────────────────────────────────────────────────── */
+.sg-rows {
+  display: flex; flex-direction: column;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.sg-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 14px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--app-border, rgba(255,255,255,0.08));
+  color: var(--app-text);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: background 200ms ease, transform 200ms ease;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: rgba(124, 61, 255, 0.06); transform: translateX(2px); }
+  &:active { transform: scale(0.98); }
+}
+
+.sg-row-icon {
+  width: 36px; height: 36px; border-radius: 12px;
+  background: rgba(33, 212, 253, 0.10);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  svg { stroke: #21D4FD; }
+}
+
+.sg-row-icon--red {
+  background: rgba(217, 35, 30, 0.10);
+  svg { stroke: #d9231e; }
+}
+
+.sg-row-body {
+  flex: 1; min-width: 0;
+}
+
+.sg-row-title {
+  display: block; font-size: 15px; font-weight: 700;
+  color: var(--app-text);
+}
+
+.sg-row-sub {
+  display: block; font-size: 12px; margin-top: 2px;
+  color: var(--app-muted);
+}
+
+.sg-chevron {
+  stroke: var(--app-muted, rgba(255,255,255,0.5));
+  flex-shrink: 0;
+}
+
+.sg-row-right {
+  display: flex; align-items: center; gap: 6px;
+}
+
+.sg-badge-small {
+  background: linear-gradient(135deg, #7C3DFF, #21D4FD);
+  color: #ffffff;
+  font-size: 11px; font-weight: 800;
+  padding: 2px 8px; border-radius: 999px;
+}
+
+/* ─── Toggle row ──────────────────────────────────────────────────── */
+.sg-row-toggle {
+  cursor: default;
+  &:hover { transform: none; }
+}
+
+/* ─── Slider row ──────────────────────────────────────────────────── */
+.sg-row-slider {
+  cursor: default; align-items: flex-start;
+  padding-bottom: 16px;
+  &:hover { transform: none; }
+}
+
+.sg-slider-body {
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+.sg-slider-top {
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+.sg-slider-val {
+  font-size: 13px; font-weight: 700;
+  color: #21D4FD;
+}
+
+.sg-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%; height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    #7C3DFF calc(var(--val, 80) * 1%),
+    rgba(255,255,255,0.15) calc(var(--val, 80) * 1%)
+  );
+  outline: none; cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: linear-gradient(135deg, #7C3DFF, #21D4FD);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(124, 61, 255, 0.5);
+  }
+  &::-moz-range-thumb {
+    width: 18px; height: 18px; border-radius: 50%; border: none;
+    background: linear-gradient(135deg, #7C3DFF, #21D4FD);
+    cursor: pointer;
+  }
+}
+
+/* ─── iOS-style toggle ────────────────────────────────────────────── */
+.sg-ios-toggle {
+  width: 50px; height: 28px; border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0; cursor: pointer;
+  display: flex; align-items: center;
+  position: relative; flex-shrink: 0;
+  transition: background 280ms ease, border-color 280ms ease;
+
+  &.toggle-on {
+    background: linear-gradient(135deg, #7C3DFF, #21D4FD);
+    border-color: rgba(33, 212, 253, 0.40);
+  }
+}
+
+.sg-toggle-thumb {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  position: absolute; left: 2px;
+  transition: transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  .toggle-on & { transform: translateX(22px); }
+}
+
+/* ─── Light theme toggle border fix ──────────────────────────────── */
+.theme-light .sg-ios-toggle {
+  border-color: rgba(7, 17, 31, 0.18);
+  background: rgba(7, 17, 31, 0.08);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   LOGOUT BUTTON
+═══════════════════════════════════════════════════════════════════ */
+.sg-logout {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  width: 100%; padding: 16px 24px;
+  border: 1px solid rgba(217, 35, 30, 0.38);
+  border-radius: 999px;
+  background: rgba(217, 35, 30, 0.08);
+  color: #e84040;
+  font-size: 16px; font-weight: 700;
+  cursor: pointer; font-family: inherit;
+  transition: background 220ms ease, transform 200ms ease, box-shadow 220ms ease;
+
+  svg { stroke: #e84040; }
+
+  &:hover {
+    background: rgba(217, 35, 30, 0.14);
+    box-shadow: 0 8px 28px rgba(217, 35, 30, 0.20);
+  }
+  &:active { transform: scale(0.97); }
+}
+
+.sg-logout-icon {
+  width: 36px; height: 36px; border-radius: 12px;
+  background: rgba(217, 35, 30, 0.14);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ─── Bottom spacer ───────────────────────────────────────────────── */
+.sg-bottom-spacer { height: 120px; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   LIGHT MODE OVERRIDES — explicit contrast
+═══════════════════════════════════════════════════════════════════ */
+.theme-light {
+  .settings-page,
+  ion-content.settings-page {
+    --background: #ffffff;
+    color: #07111f;
+  }
+
+  .sg-header-center h1 { color: #07111f; }
+  .sg-header-center p  { color: rgba(7, 17, 31, 0.62); }
+  .sg-back             { color: rgba(7, 17, 31, 0.86); }
+
+  .sg-name             { color: #07111f; }
+  .sg-username         { color: rgba(7, 17, 31, 0.62); }
+  .sg-phone-row        { color: #07111f; }
+
+  .sg-card-header h3   { color: #07111f; }
+  .sg-row-title        { color: #07111f; }
+  .sg-row-sub          { color: rgba(7, 17, 31, 0.62); }
+  .sg-chevron          { stroke: rgba(7, 17, 31, 0.40); }
+
+  .sg-row-icon         { background: rgba(33, 212, 253, 0.12); svg { stroke: #21D4FD; } }
+  .sg-card-icon-wrap   { background: rgba(124, 61, 255, 0.10); }
+
+  // Border between rows
+  .sg-row { border-bottom-color: rgba(7, 17, 31, 0.08); }
+
+  // Avatar stays white
+  .sg-avatar { background: rgba(0, 0, 0, 0.10); color: #ffffff; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   DARK MODE OVERRIDES
+═══════════════════════════════════════════════════════════════════ */
+.theme-dark {
+  ion-content.settings-page {
+    --background: #000000;
+    color: #ffffff;
+  }
+}

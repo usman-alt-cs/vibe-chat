@@ -1,0 +1,232 @@
+<ion-content>
+  <div class="landing-page">
+    
+    <!-- Navbar -->
+    <nav class="navbar">
+      <!-- Desktop Nav -->
+      <div class="nav-container desktop-nav">
+        <div class="logo">VibeChat</div>
+        <div class="nav-links">
+          <a (click)="scrollTo('features')">Features</a>
+          <a (click)="scrollTo('preview')">Preview</a>
+          <a (click)="scrollTo('security')">Security</a>
+        </div>
+        <button class="vibe-btn small" routerLink="/login">Start Chatting</button>
+      </div>
+      <!-- Mobile Nav -->
+      <div class="mobile-nav">
+        <ion-icon name="search"></ion-icon>
+        <div class="logo">VibeChat</div>
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </div>
+    </nav>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-content">
+          <h1>Chat instantly.<br><span class="highlight">Stay connected.</span></h1>
+          <p>VibeChat makes one-to-one conversations simple, stylish, and personal. Experience the warmth of modern messaging.</p>
+          <div class="hero-actions">
+            <button class="vibe-btn large" routerLink="/signup">Get Started</button>
+            <button class="vibe-btn outline large" (click)="onViewApp()">View App</button>
+          </div>
+        </div>
+        
+        <div class="hero-visual">
+          <div class="glow-orb primary-glow"></div>
+          <div class="glow-orb secondary-glow"></div>
+          
+          <div class="phone-mockup">
+            <div class="phone-header">
+              <h3>Messages</h3>
+              <ion-icon name="create-outline"></ion-icon>
+            </div>
+            <div class="phone-search">
+              <div class="search-box">
+                <ion-icon name="search"></ion-icon> Search users...
+              </div>
+            </div>
+            <div class="phone-chats">
+              <div class="chat-row">
+                <div class="avatar bg-blue">S</div>
+                <div class="chat-info">
+                  <h4>Sarah Jenkins</h4>
+                  <p>Absolutely! See you at 5 ✨</p>
+                </div>
+              </div>
+              <div class="chat-row">
+                <div class="avatar bg-purple">M</div>
+                <div class="chat-info">
+                  <h4>Mike T.</h4>
+                  <p>Project files are ready.</p>
+                </div>
+              </div>
+              <div class="chat-row">
+                <div class="avatar bg-orange">A</div>
+                <div class="chat-info">
+                  <h4>Alex</h4>
+                  <p>Hey! Ready for coffee? ☕</p>
+                </div>
+              </div>
+              <div class="chat-row">
+                <div class="avatar bg-pink">E</div>
+                <div class="chat-info">
+                  <h4>Emma</h4>
+                  <p>Thanks for the update!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="floating-bubble bubble-1">
+            Hey! Ready for coffee? ☕
+          </div>
+          <div class="floating-bubble bubble-2">
+            Absolutely! See you at 5 ✨
+          </div>
+          <div class="floating-bubble bubble-3">
+            Project files are ready.
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section id="features" class="feature-section section-container">
+        <div class="feature-grid">
+          <div class="feature-card large glass-panel">
+            <ion-icon name="chatbubbles"></ion-icon>
+            <h3>One-to-one chats</h3>
+            <p>Private, focused conversations without the noise of group threads. Just you and your friends.</p>
+          </div>
+          <div class="feature-card glass-panel">
+            <ion-icon name="search"></ion-icon>
+            <h3>Fast search</h3>
+            <p>Find anyone in seconds with our optimized directory.</p>
+          </div>
+          <div class="feature-card glass-panel">
+            <ion-icon name="time"></ion-icon>
+            <h3>Recent history</h3>
+            <p>Pick up exactly where you left off.</p>
+          </div>
+          <div class="feature-card full-width glass-panel">
+            <div class="feature-text">
+              <ion-icon name="contrast"></ion-icon>
+              <h3>Light and Dark Mode</h3>
+              <p>Choose your vibe. Whether it's the late-night plum glow or a crisp daytime beige, we've got you covered.</p>
+            </div>
+            <div class="feature-visual">
+              <div class="theme-toggle">
+                <ion-icon name="moon"></ion-icon>
+                <div class="toggle-track"><div class="toggle-thumb"></div></div>
+                <ion-icon name="sunny"></ion-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- App Preview Section -->
+      <section id="preview" class="preview-section section-container">
+        <div class="section-header center">
+          <h2>Beautiful from start to finish.</h2>
+        </div>
+        <div class="preview-cards">
+          <!-- Login Preview -->
+          <div class="preview-card glass-panel login-preview translate-y">
+            <div class="login-ui">
+              <h3>Welcome</h3>
+              <div class="fake-input"></div>
+              <div class="fake-input"></div>
+              <div class="fake-btn"></div>
+            </div>
+          </div>
+          <!-- Messages Preview -->
+          <div class="preview-card glass-panel messages-preview pop-out">
+            <div class="p-header">Messages</div>
+            <div class="p-content">
+              <div class="p-row">
+                <div class="p-av bg-blue"></div>
+                <div class="p-lines"><div class="l1"></div><div class="l2"></div></div>
+                <div class="p-dot"></div>
+              </div>
+              <div class="p-row">
+                <div class="p-av bg-purple"></div>
+                <div class="p-lines"><div class="l1 short"></div><div class="l2"></div></div>
+              </div>
+            </div>
+          </div>
+          <!-- Chat Preview -->
+          <div class="preview-card glass-panel chat-preview translate-y">
+            <div class="p-header small">
+              <div class="p-av mini bg-blue"></div>Sarah Jenkins
+            </div>
+            <div class="p-chat-area">
+              <div class="msg left">Hey!</div>
+              <div class="msg right">How are you?</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Security Section -->
+      <section id="security" class="security-section section-container">
+        <div class="section-header center">
+          <h2>Simple, safe, and private.</h2>
+          <p>We prioritize your intimacy and security above all else, ensuring every message stays between you and the recipient.</p>
+        </div>
+        <div class="security-grid">
+          <div class="security-item">
+            <ion-icon name="lock-closed"></ion-icon>
+            <h3>Secure email/password login</h3>
+            <p>Your account is safely protected with standard email authentication.</p>
+          </div>
+          <div class="security-item">
+            <ion-icon name="shield-checkmark"></ion-icon>
+            <h3>Passwords protected with bcrypt</h3>
+            <p>We securely hash and salt your credentials to ensure your data stays safe.</p>
+          </div>
+          <div class="security-item">
+            <ion-icon name="key"></ion-icon>
+            <h3>JWT protected routes</h3>
+            <p>Your session and data are authenticated and protected across all requests.</p>
+          </div>
+          <div class="security-item">
+            <ion-icon name="person"></ion-icon>
+            <h3>Private one-to-one message access</h3>
+            <p>Conversations are strictly isolated. Only you and the recipient have access.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="cta-section section-container">
+        <div class="cta-card glass-panel">
+          <div class="cta-glow"></div>
+          <h2>Ready to start chatting?</h2>
+          <p>Create your account and send your first message in seconds.</p>
+          <button class="vibe-btn large cta-btn" routerLink="/signup">Launch VibeChat</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo">VibeChat</div>
+          <p>Modern messaging, made simple.</p>
+        </div>
+        <div class="footer-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Contact</a>
+        </div>
+        <div class="footer-copy">
+          &copy; 2026 VibeChat Inc. All rights reserved.
+        </div>
+      </div>
+    </footer>
+    
+  </div>
+</ion-content>
